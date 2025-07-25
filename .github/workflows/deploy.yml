@@ -1,0 +1,40 @@
+name: 🚀 Auto Deploy to Ubuntu via SSH
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: 🔧 Deploy NestJS App to Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 SSH to EC2 and Deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            echo "👉 Loyihani olish yoki yangilash..."
+            cd /home/${{ secrets.SERVER_USER }}
+
+            if [ -d "Exam-main" ]; then
+              cd Exam-main
+              git reset --hard
+              git clean -fd
+              git pull origin main
+            else
+              git clone https://github.com/exam-main/Exam-main.git
+              cd Exam-main
+            fi
+
+            echo "🧼 Eski konteynerlarni to'xtatish..."
+            docker compose down || true
+
+            echo "🚧 Yangilash (build) va ishga tushirish..."
+            docker compose up -d --build
+
+            echo "✅ Deploy muvoffaqiyatli yakunlandi!"
