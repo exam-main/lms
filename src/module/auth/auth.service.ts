@@ -17,6 +17,9 @@ import { RedisClientType } from 'redis';
 export class AuthService implements OnModuleInit {
   private redisClient: RedisClientType;
 
+
+
+  
   constructor(
     private readonly jwtService: JwtService,
     private readonly prisma: PrismaService,
