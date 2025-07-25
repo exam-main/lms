@@ -63,10 +63,6 @@ export class QuestionService {
     });
   }
 
-
-
-
-  
   deleteAnswer(questionId: number) {
     return this.prisma.questionAnswer.delete({
       where: { questionId },
