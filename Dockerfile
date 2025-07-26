@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # 7. Port ochish
-EXPOSE 3000
+EXPOSE 3000 
 
 # 8. App'ni ishga tushirish
 CMD ["npm", "run", "start:prod"]
