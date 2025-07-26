@@ -12,11 +12,6 @@ services:
       - postgres
       - redis
     restart: always
-    command: >
-      sh -c "npx prisma generate &&
-             npx prisma migrate deploy &&
-             npm run build &&
-             npm run start:prod"
 
   postgres:
     image: postgres:15
