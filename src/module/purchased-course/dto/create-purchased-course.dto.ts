@@ -12,7 +12,7 @@ export class CreatePurchasedCourseDto {
 
   @ApiPropertyOptional({
     example: 199.99,
-    description: 'To\'langan summa (ixtiyoriy)',
+    description: "To'langan summa (ixtiyoriy)",
   })
   @IsNumber()
   @IsOptional()
@@ -21,7 +21,7 @@ export class CreatePurchasedCourseDto {
   @ApiProperty({
     example: PaidVia.PAYME,
     enum: PaidVia,
-    description: 'To\'lov usuli',
+    description: "To'lov usuli",
   })
   @IsEnum(PaidVia)
   paidVia: PaidVia;

@@ -35,10 +35,10 @@ export class RolesGuard implements CanActivate {
     }
 
     // Kerakli rollarni olish
-    const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const requiredRoles = this.reflector.getAllAndOverride<string[]>(
+      ROLES_KEY,
+      [context.getHandler(), context.getClass()],
+    );
 
     // Agar rol belgilanmagan bo'lsa, har kim kirishi mumkin
     if (!requiredRoles || requiredRoles.length === 0) {

@@ -17,9 +17,6 @@ import { RedisClientType } from 'redis';
 export class AuthService implements OnModuleInit {
   private redisClient: RedisClientType;
 
-
-
-  
   constructor(
     private readonly jwtService: JwtService,
     private readonly prisma: PrismaService,
@@ -31,23 +28,12 @@ export class AuthService implements OnModuleInit {
   }
 
   async register(registerAuthDto: RegisterAuthDto) {
-    const {
-      username,
-      email,
-      phone,
-      password,
-      fullName,
-      avatarUrl,
-      country,
-    } = registerAuthDto;
+    const { username, email, phone, password, fullName, avatarUrl, country } =
+      registerAuthDto;
 
     const existingUser = await this.prisma.user.findFirst({
       where: {
-        OR: [
-          { username },
-          { email },
-          { phone },
-        ],
+        OR: [{ username }, { email }, { phone }],
         // Agar soft-delete bo‘lsa:
         // deletedAt: null,
       },
@@ -89,7 +75,7 @@ export class AuthService implements OnModuleInit {
     });
 
     await this.redisClient.set(user.id.toString(), refreshToken, {
-      EX: 7 * 24 * 60 * 60, 
+      EX: 7 * 24 * 60 * 60,
     });
 
     return {

@@ -24,19 +24,19 @@ import { CheckHomeworkDto } from './dto/check-homework.dto';
 @Controller('api/homework')
 export class HomeworkController {
   constructor(private service: HomeworkService) {}
-  
+
   @Get('course/:id')
   @Roles(UserRole.MENTOR, UserRole.ADMIN, UserRole.ASSISTANT)
   getByCourse(@Param('id') id: string) {
     return this.service.getByCourse(id);
   }
-  
+
   @Get('detail/:id')
   @Roles(UserRole.MENTOR, UserRole.ADMIN, UserRole.ASSISTANT)
   getDetail(@Param('id', ParseIntPipe) id: number) {
     return this.service.getDetail(id);
   }
-  
+
   @Post('create')
   @Roles(UserRole.MENTOR, UserRole.ADMIN)
   create(@Body() dto: CreateHomeworkDto, @Req() req) {
@@ -46,7 +46,10 @@ export class HomeworkController {
 
   @Patch('update/:id')
   @Roles(UserRole.MENTOR, UserRole.ADMIN)
-  update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateHomeworkDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateHomeworkDto,
+  ) {
     return this.service.update(id, dto);
   }
 

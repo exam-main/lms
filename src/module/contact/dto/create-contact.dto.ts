@@ -7,12 +7,18 @@ export class CreateContactDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ example: 'ali@example.com', description: 'Foydalanuvchi email manzili' })
+  @ApiProperty({
+    example: 'ali@example.com',
+    description: 'Foydalanuvchi email manzili',
+  })
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @ApiProperty({ example: 'Iltimos, menga qoshimcha malumot yuboring.', description: 'Xabar matni' })
+  @ApiProperty({
+    example: 'Iltimos, menga qoshimcha malumot yuboring.',
+    description: 'Xabar matni',
+  })
   @IsNotEmpty()
   @IsString()
   message: string;

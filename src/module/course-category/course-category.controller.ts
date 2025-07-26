@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { CourseCategoryService } from './course-category.service';
 import { CreateCourseCategoryDto } from './dto/create-course-category.dto';

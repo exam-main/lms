@@ -1,5 +1,12 @@
 import {
-  Controller, Get, Post, Body, Param, Delete, UseGuards, Request,
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { CourseRatingService } from './course-rating.service';
 import { CreateRatingDto } from './dto/create-rating.dto';

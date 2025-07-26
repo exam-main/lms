@@ -2,23 +2,35 @@ import { IsString, IsOptional, IsBoolean } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateQuestionDto {
-  @ApiProperty({ example: 'What is the capital of France?', description: 'Question text' })
+  @ApiProperty({
+    example: 'What is the capital of France?',
+    description: 'Question text',
+  })
   @IsString()
   text: string;
 
-  @ApiPropertyOptional({ example: 'image-url-or-filename.jpg', description: 'Optional file attached to the question' })
+  @ApiPropertyOptional({
+    example: 'image-url-or-filename.jpg',
+    description: 'Optional file attached to the question',
+  })
   @IsOptional()
   @IsString()
   file?: string;
 }
 
 export class UpdateQuestionDto {
-  @ApiPropertyOptional({ example: 'What is the capital of France?', description: 'Question text' })
+  @ApiPropertyOptional({
+    example: 'What is the capital of France?',
+    description: 'Question text',
+  })
   @IsOptional()
   @IsString()
   text?: string;
 
-  @ApiPropertyOptional({ example: 'image-url-or-filename.jpg', description: 'Optional file attached to the question' })
+  @ApiPropertyOptional({
+    example: 'image-url-or-filename.jpg',
+    description: 'Optional file attached to the question',
+  })
   @IsOptional()
   @IsString()
   file?: string;
@@ -29,7 +41,10 @@ export class AnswerDto {
   @IsString()
   text: string;
 
-  @ApiPropertyOptional({ example: 'answer-image.jpg', description: 'Optional file attached to the answer' })
+  @ApiPropertyOptional({
+    example: 'answer-image.jpg',
+    description: 'Optional file attached to the answer',
+  })
   @IsOptional()
   @IsString()
   file?: string;
@@ -40,7 +55,10 @@ export class CheckAnswerDto {
   @IsBoolean()
   correct: boolean;
 
-  @ApiPropertyOptional({ example: 'Good job!', description: 'Optional comment about the answer' })
+  @ApiPropertyOptional({
+    example: 'Good job!',
+    description: 'Optional comment about the answer',
+  })
   @IsOptional()
   @IsString()
   comment?: string;

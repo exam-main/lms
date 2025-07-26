@@ -11,7 +11,7 @@ export class LessonGroupService {
     return this.prisma.lessonGroup.findMany({
       where: { courseId },
       include: { lessons: true },
-      orderBy: { createdAt: 'asc' }
+      orderBy: { createdAt: 'asc' },
     });
   }
 

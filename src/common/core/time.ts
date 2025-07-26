@@ -1,3 +1,3 @@
-export function  secToMills(seconds: number){
-    return seconds *1000
+export function secToMills(seconds: number) {
+  return seconds * 1000;
 }

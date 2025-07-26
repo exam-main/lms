@@ -10,7 +10,9 @@ export class UpdateMentorDto {
   @IsNumber()
   mentorId: number;
 
-  @ApiProperty({ example: { bio: 'Updated mentor bio', experience: '5 years' } })
+  @ApiProperty({
+    example: { bio: 'Updated mentor bio', experience: '5 years' },
+  })
   @IsObject()
   mentorData: Record<string, any>;
 }

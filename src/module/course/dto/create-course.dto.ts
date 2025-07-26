@@ -51,7 +51,8 @@ export class CreateCourseDto {
 
   @ApiProperty({
     example: 1,
-    description: 'Category ID (CourseCategory jadvalidan mavjud ID bolishi kerak)',
+    description:
+      'Category ID (CourseCategory jadvalidan mavjud ID bolishi kerak)',
   })
   @Type(() => Number)
   @IsNumber()
@@ -59,7 +60,8 @@ export class CreateCourseDto {
 
   @ApiProperty({
     example: 2,
-    description: 'Mentor ID (User jadvalidan mavjud MENTOR roldagi foydalanuvchi ID)',
+    description:
+      'Mentor ID (User jadvalidan mavjud MENTOR roldagi foydalanuvchi ID)',
   })
   @Type(() => Number)
   @IsNumber()

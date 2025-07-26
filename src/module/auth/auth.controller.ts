@@ -1,20 +1,9 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Res,
-  SetMetadata,
-} from '@nestjs/common';
+import { Controller, Post, Body, Res, SetMetadata } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { Response } from 'express';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBody,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -63,9 +52,7 @@ export class AuthController {
     },
   })
   @ApiResponse({ status: 200, description: 'Yangi access token qaytarildi' })
-  async refreshToken(
-    @Body() body: { userId: string; refreshToken: string },
-  ) {
+  async refreshToken(@Body() body: { userId: string; refreshToken: string }) {
     return this.authService.refreshToken(body.userId, body.refreshToken);
   }
 }

@@ -33,7 +33,6 @@ import { FilesModule } from './module/files/files.module';
     RedisModule,
     SmsModule,
 
-    
     AuthModule,
 
     VerificationModule,

@@ -37,7 +37,10 @@ export class MyProfileController {
   @ApiOperation({ summary: 'Profilni yangilash' })
   @ApiBody({ type: UpdateMyProfileDto })
   @ApiResponse({ status: 200, description: 'Profil muvaffaqiyatli yangilandi' })
-  updateMyProfile(@CurrentUser() user: UserEntity, @Body() dto: UpdateMyProfileDto) {
+  updateMyProfile(
+    @CurrentUser() user: UserEntity,
+    @Body() dto: UpdateMyProfileDto,
+  ) {
     return this.service.updateMyProfile(user.id, dto);
   }
 
@@ -52,7 +55,10 @@ export class MyProfileController {
   @ApiOperation({ summary: 'Oxirgi faollikni yangilash' })
   @ApiBody({ type: UpdateLastActivityDto })
   @ApiResponse({ status: 200, description: 'Oxirgi faollik yangilandi' })
-  updateMyLastActivity(@CurrentUser() user: UserEntity, @Body() dto: UpdateLastActivityDto) {
+  updateMyLastActivity(
+    @CurrentUser() user: UserEntity,
+    @Body() dto: UpdateLastActivityDto,
+  ) {
     return this.service.updateMyLastActivity(user.id, dto);
   }
 
@@ -68,15 +74,24 @@ export class MyProfileController {
   @ApiOperation({ summary: 'Parolni yangilash' })
   @ApiBody({ type: UpdatePasswordDto })
   @ApiResponse({ status: 200, description: 'Parol muvaffaqiyatli yangilandi' })
-  updateMyPassword(@CurrentUser() user: UserEntity, @Body() dto: UpdatePasswordDto) {
+  updateMyPassword(
+    @CurrentUser() user: UserEntity,
+    @Body() dto: UpdatePasswordDto,
+  ) {
     return this.service.updateMyPassword(user.id, dto);
   }
 
   @Patch('mentor-profile')
   @ApiOperation({ summary: 'Mentor profilini yangilash' })
   @ApiBody({ type: UpdateMentorProfileDto })
-  @ApiResponse({ status: 200, description: 'Mentor profili muvaffaqiyatli yangilandi' })
-  updateMyMentorProfile(@CurrentUser() user: UserEntity, @Body() dto: UpdateMentorProfileDto) {
+  @ApiResponse({
+    status: 200,
+    description: 'Mentor profili muvaffaqiyatli yangilandi',
+  })
+  updateMyMentorProfile(
+    @CurrentUser() user: UserEntity,
+    @Body() dto: UpdateMentorProfileDto,
+  ) {
     return this.service.updateMyMentorProfile(user.id, dto);
   }
 }

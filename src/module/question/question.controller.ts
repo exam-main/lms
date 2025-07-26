@@ -9,7 +9,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { QuestionService } from './question.service';
-import { CreateQuestionDto, UpdateQuestionDto, AnswerDto, CheckAnswerDto } from './dto';
+import {
+  CreateQuestionDto,
+  UpdateQuestionDto,
+  AnswerDto,
+  CheckAnswerDto,
+} from './dto';
 import { Roles } from 'src/common/decorators/roles.decorators';
 import { RolesGuard } from 'src/common/JWT/roles.guard';
 import { RolesEnum } from 'src/common/enums/roles.enums';
@@ -19,7 +24,7 @@ import { UserEntity } from 'src/common/decorators/user.decorators';
 @Controller('api/questions')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
-  
+
   @Get('mine')
   @UseGuards(RolesGuard)
   @Roles(RolesEnum.STUDENT)
@@ -36,22 +41,23 @@ export class QuestionController {
 
   @Get('single/:id')
   @UseGuards(RolesGuard)
-  @Roles(RolesEnum.STUDENT, RolesEnum.MENTOR, RolesEnum.ADMIN, RolesEnum.ASSISTANT)
+  @Roles(
+    RolesEnum.STUDENT,
+    RolesEnum.MENTOR,
+    RolesEnum.ADMIN,
+    RolesEnum.ASSISTANT,
+  )
   getSingle(@Param('id') id: number) {
     return this.questionService.getSingle(id);
   }
 
-
-
-
-  
   @Post('read/:id')
   @UseGuards(RolesGuard)
   @Roles(RolesEnum.MENTOR, RolesEnum.ADMIN, RolesEnum.ASSISTANT)
   markAsRead(@Param('id') id: number) {
     return this.questionService.markAsRead(id);
   }
-  
+
   @Post('create/:courseId')
   @UseGuards(RolesGuard)
   @Roles(RolesEnum.STUDENT)
@@ -73,7 +79,11 @@ export class QuestionController {
   @Post('answer/:id')
   @UseGuards(RolesGuard)
   @Roles(RolesEnum.MENTOR, RolesEnum.ASSISTANT)
-  createAnswer(@Param('id') id: number, @AuthUser() user: UserEntity, @Body() dto: AnswerDto) {
+  createAnswer(
+    @Param('id') id: number,
+    @AuthUser() user: UserEntity,
+    @Body() dto: AnswerDto,
+  ) {
     return this.questionService.createAnswer(id, user.id, dto);
   }
 

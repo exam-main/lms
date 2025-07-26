@@ -101,7 +101,9 @@ export class CourseController {
   updateMentor(@Body() dto: UpdateMentorDto) {
     const { courseId, mentorId, mentorData } = dto;
     if (!courseId || !mentorId || !mentorData) {
-      throw new Error('Missing courseId, mentorId, or mentorData in request body');
+      throw new Error(
+        'Missing courseId, mentorId, or mentorData in request body',
+      );
     }
     return this.courseService.updateMentor(courseId, mentorId, mentorData);
   }

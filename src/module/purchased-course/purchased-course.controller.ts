@@ -1,6 +1,11 @@
 import {
-  Controller, Get, Post, Body, Param, Request,
-  UseGuards
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { PurchasedCourseService } from './purchased-course.service';
 import { CreatePurchasedCourseDto } from './dto/create-purchased-course.dto';

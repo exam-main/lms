@@ -15,7 +15,11 @@ export class FilesService {
     return filePath;
   }
 
-  async getPrivateLessonFile(lessonId: string, name: string, userId: number): Promise<string> {
+  async getPrivateLessonFile(
+    lessonId: string,
+    name: string,
+    userId: number,
+  ): Promise<string> {
     const lesson = await this.prisma.lesson.findFirst({
       where: { id: lessonId },
       include: { group: true },
@@ -23,16 +27,27 @@ export class FilesService {
 
     if (!lesson) throw new NotFoundException('Lesson not found');
 
-    
-
-    const filePath = join(__dirname, '..', '..', '..', 'uploads', 'lesson-files', lessonId, name);
+    const filePath = join(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'uploads',
+      'lesson-files',
+      lessonId,
+      name,
+    );
     await access(filePath).catch(() => {
       throw new NotFoundException('File not found');
     });
     return filePath;
   }
 
-  async getLessonVideoSegment(lessonId: string, hlsf: string, userId: number): Promise<string> {
+  async getLessonVideoSegment(
+    lessonId: string,
+    hlsf: string,
+    userId: number,
+  ): Promise<string> {
     const lesson = await this.prisma.lesson.findFirst({
       where: { id: lessonId },
       include: { group: true },
@@ -40,9 +55,16 @@ export class FilesService {
 
     if (!lesson) throw new NotFoundException('Lesson not found');
 
-    
-
-    const filePath = join(__dirname, '..', '..', '..', 'uploads', 'hls', lessonId, hlsf);
+    const filePath = join(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'uploads',
+      'hls',
+      lessonId,
+      hlsf,
+    );
     await access(filePath).catch(() => {
       throw new NotFoundException('Video segment not found');
     });

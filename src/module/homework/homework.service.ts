@@ -38,7 +38,6 @@ export class HomeworkService {
   create(dto: CreateHomeworkDto, mentorId?: number) {
     const data: any = { ...dto };
 
-    
     if (mentorId) {
       data.mentorId = mentorId;
     }

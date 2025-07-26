@@ -6,9 +6,9 @@ import { RedisModule } from 'src/common/redis/redis.module';
 import { SmsModule } from 'src/common/services/sms.module';
 
 @Module({
-  imports: [PrismaModule, RedisModule, SmsModule],  
+  imports: [PrismaModule, RedisModule, SmsModule],
   controllers: [VerificationController],
   providers: [VerificationService],
-  exports: [VerificationService],   
+  exports: [VerificationService],
 })
 export class VerificationModule {}

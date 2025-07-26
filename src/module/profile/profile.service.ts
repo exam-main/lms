@@ -1,7 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/core/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
-import { UpdateLastActivityDto, UpdateMentorProfileDto, UpdateMyProfileDto, UpdatePasswordDto, UpdatePhoneDto } from './dto/dto';
+import {
+  UpdateLastActivityDto,
+  UpdateMentorProfileDto,
+  UpdateMyProfileDto,
+  UpdatePasswordDto,
+  UpdatePhoneDto,
+} from './dto/dto';
 
 @Injectable()
 export class MyProfileService {

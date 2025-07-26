@@ -22,7 +22,10 @@ export class RegisterAuthDto {
   @IsString()
   fullName: string;
 
-  @ApiPropertyOptional({ example: 'https://example.com/avatar.jpg', description: 'Avatar URL' })
+  @ApiPropertyOptional({
+    example: 'https://example.com/avatar.jpg',
+    description: 'Avatar URL',
+  })
   @IsOptional()
   @IsString()
   avatarUrl?: string;

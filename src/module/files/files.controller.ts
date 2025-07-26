@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { Response } from 'express';
 import { JwtAuthGuard } from 'src/common/JWT/jwt-auth-guard';
@@ -33,7 +27,11 @@ export class FilesController {
     @CurrentUser() user: UserEntity,
     @Res() res: Response,
   ) {
-    const file = await this.filesService.getPrivateLessonFile(lessonId, name, user.id);
+    const file = await this.filesService.getPrivateLessonFile(
+      lessonId,
+      name,
+      user.id,
+    );
     return res.sendFile(file);
   }
 
@@ -46,7 +44,11 @@ export class FilesController {
     @CurrentUser() user: UserEntity,
     @Res() res: Response,
   ) {
-    const segment = await this.filesService.getLessonVideoSegment(lessonId, hlsf, user.id);
+    const segment = await this.filesService.getLessonVideoSegment(
+      lessonId,
+      hlsf,
+      user.id,
+    );
     return res.sendFile(segment);
   }
 }

@@ -38,7 +38,9 @@ export class CourseService {
   }
 
   async findAllAdmin() {
-    return this.prisma.course.findMany({ include: { mentor: true, category: true } });
+    return this.prisma.course.findMany({
+      include: { mentor: true, category: true },
+    });
   }
 
   async findMyCourses(mentorId: number) {
@@ -81,7 +83,6 @@ export class CourseService {
   }
 
   async create(dto: CreateCourseDto) {
-   
     const category = await this.prisma.courseCategory.findUnique({
       where: { id: dto.categoryId },
     });
@@ -90,7 +91,6 @@ export class CourseService {
       throw new NotFoundException('Category not found');
     }
 
-    
     const mentor = await this.prisma.user.findUnique({
       where: { id: dto.mentorId },
     });
@@ -99,7 +99,6 @@ export class CourseService {
       throw new NotFoundException('Mentor not found');
     }
 
-   
     return this.prisma.course.create({
       data: {
         name: dto.name,
@@ -119,16 +118,28 @@ export class CourseService {
   }
 
   async updateMentor(courseId: string, mentorId: number, mentorData: any) {
-    await this.prisma.course.update({ where: { id: courseId }, data: { mentorId } });
-    return this.prisma.user.update({ where: { id: mentorId }, data: mentorData });
+    await this.prisma.course.update({
+      where: { id: courseId },
+      data: { mentorId },
+    });
+    return this.prisma.user.update({
+      where: { id: mentorId },
+      data: mentorData,
+    });
   }
 
   async publish(id: string) {
-    return this.prisma.course.update({ where: { id }, data: { published: true } });
+    return this.prisma.course.update({
+      where: { id },
+      data: { published: true },
+    });
   }
 
   async unpublish(id: string) {
-    return this.prisma.course.update({ where: { id }, data: { published: false } });
+    return this.prisma.course.update({
+      where: { id },
+      data: { published: false },
+    });
   }
 
   async delete(id: string) {

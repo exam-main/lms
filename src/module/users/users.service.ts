@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/common/core/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -15,32 +19,28 @@ export class UserService {
     return bcrypt.hash(password, salt);
   }
 
-  
-async createAdmin(dto: CreateAdminDto) {
-  const existing = await this.prisma.user.findUnique({
-    where: { phone: dto.phone },
-  });
+  async createAdmin(dto: CreateAdminDto) {
+    const existing = await this.prisma.user.findUnique({
+      where: { phone: dto.phone },
+    });
 
-  if (existing) {
-    throw new BadRequestException('Bu telefon raqam bilan user mavjud');
+    if (existing) {
+      throw new BadRequestException('Bu telefon raqam bilan user mavjud');
+    }
+
+    const password = await this.hashPassword(dto.password);
+
+    return this.prisma.user.create({
+      data: {
+        phone: dto.phone,
+        fullName: dto.fullName,
+        password,
+        role: 'ADMIN',
+        username: dto.username,
+        email: dto.email,
+      },
+    });
   }
-
-  const password = await this.hashPassword(dto.password);
-
-  return this.prisma.user.create({
-    data: {
-      phone: dto.phone,
-      fullName: dto.fullName,
-      password,
-      role: 'ADMIN',
-      username: dto.username, 
-      email: dto.email,       
-    },
-  });
-}
-
-
-
 
   async createMentor(dto: CreateMentorDto) {
     const password = await this.hashPassword(dto.password);
@@ -74,9 +74,7 @@ async createAdmin(dto: CreateAdminDto) {
     return user;
   }
 
-
   async createAssistant(dto: CreateAssistantDto) {
-  
     const course = await this.prisma.course.findUnique({
       where: { id: dto.courseId },
     });
@@ -85,10 +83,8 @@ async createAdmin(dto: CreateAdminDto) {
       throw new NotFoundException('Course not found');
     }
 
-   
     const password = await this.hashPassword(dto.password);
 
-  
     const user = await this.prisma.user.create({
       data: {
         phone: dto.phone,
@@ -100,7 +96,6 @@ async createAdmin(dto: CreateAdminDto) {
       },
     });
 
-    
     await this.prisma.assignedCourse.create({
       data: {
         userId: user.id,
@@ -111,7 +106,6 @@ async createAdmin(dto: CreateAdminDto) {
     return user;
   }
 
-  
   async updateMentor(id: number, dto: UpdateMentorDto) {
     const user = await this.prisma.user.update({
       where: { id, role: 'MENTOR' },
@@ -138,7 +132,6 @@ async createAdmin(dto: CreateAdminDto) {
 
     return user;
   }
-
 
   getMentors() {
     return this.prisma.user.findMany({ where: { role: 'MENTOR' } });

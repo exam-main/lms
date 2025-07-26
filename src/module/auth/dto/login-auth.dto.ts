@@ -9,7 +9,10 @@ export class LoginAuthDto {
   @IsString()
   password: string;
 
-  @ApiProperty({ example: '+998901112233', description: 'Foydalanuvchi telefon raqami' })
+  @ApiProperty({
+    example: '+998901112233',
+    description: 'Foydalanuvchi telefon raqami',
+  })
   @IsString()
   phone: string;
 }

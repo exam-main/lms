@@ -2,7 +2,10 @@ import { IsInt, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateExamQuestionDto {
-  @ApiProperty({ example: 'Qaysi til JavaScript kompilyatorida ishlaydi?', description: 'Savol matni' })
+  @ApiProperty({
+    example: 'Qaysi til JavaScript kompilyatorida ishlaydi?',
+    description: 'Savol matni',
+  })
   @IsString()
   question: string;
 
@@ -22,11 +25,17 @@ export class CreateExamQuestionDto {
   @IsString()
   variantD: string;
 
-  @ApiProperty({ example: 'C', description: 'To‘g‘ri javob varianti (masalan: A, B, C yoki D)' })
+  @ApiProperty({
+    example: 'C',
+    description: 'To‘g‘ri javob varianti (masalan: A, B, C yoki D)',
+  })
   @IsString()
   correctAnswer: string;
 
-  @ApiProperty({ example: 12, description: 'Savol tegishli bo‘lgan exam ID raqami' })
+  @ApiProperty({
+    example: 12,
+    description: 'Savol tegishli bo‘lgan exam ID raqami',
+  })
   @IsInt()
   examId: number;
 }

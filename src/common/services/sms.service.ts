@@ -34,7 +34,7 @@ export class SmsService {
         },
         {
           headers: {
-            Authorization: 'Bearer_' + data.data.token,  // AUthorization emas, Authorization
+            Authorization: 'Bearer_' + data.data.token, // AUthorization emas, Authorization
           },
         },
       );

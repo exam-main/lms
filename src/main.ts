@@ -9,7 +9,7 @@ async function bootstrap() {
     .setTitle('API hujjati')
     .setDescription('NestJS loyihangiz uchun Swagger hujjatlari')
     .setVersion('1.0')
-    .addBearerAuth() 
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
