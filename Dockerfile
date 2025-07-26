@@ -1,60 +1,23 @@
-
-FROM node:22-alpine AS builder
-
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY prisma ./prisma
-COPY . .
-
-RUN npx prisma generate
-RUN npm run build
-
-
+# 1. Boshlang‘ich image
 FROM node:22-alpine
 
+# 2. Ishchi katalog
 WORKDIR /app
 
+# 3. package*.json fayllarini ko‘chirib olish
 COPY package*.json ./
-RUN npm install --production
 
-# Build stage
-FROM node:22-alpine AS builder
-
-WORKDIR /app
-
-COPY package*.json ./
+# 4. Modul o‘rnatish
 RUN npm install
 
-COPY prisma ./prisma
+# 5. Barcha fayllarni konteynerga nusxalash
 COPY . .
 
-RUN npx prisma generate
-
-# 🧠 Xotirani kengaytiramiz
-ENV NODE_OPTIONS=--max_old_space_size=2048
-
+# 6. NestJS build (TypeScript -> JavaScript)
 RUN npm run build
 
-# Production stage
-FROM node:22-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app .
-
-RUN npm install --production
-
-CMD ["node", "dist/main"]
-
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-
-
+# 7. Port ochish
 EXPOSE 3000
 
-CMD ["node", "dist/main"]
+# 8. App'ni ishga tushirish
+CMD ["npm", "run", "start:prod"]
